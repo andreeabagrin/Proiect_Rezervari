@@ -1,0 +1,15 @@
+/* Custom styles */
+body{
+    background-image: url("background.jpg");
+    background-size: cover;
+}
+        .navbar-custom {
+            background-color: #333;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-nav .nav-link {
+            color: #fff;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #ffd700; /* Change to your preferred hover color */
+        }

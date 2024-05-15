@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/home_style.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( ".dtpick" ).datepicker();
+        });
+    </script>
+    <style>
+        /* Additional styles for the menu */
+        .menu-container {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .menu-item {
+            display: inline-block;
+            margin: 0 10px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            color: #ffd700; /* Change to your preferred hover color */
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <a class="menu-item" href="{{ url_for('index') }}">Home</a>
+        {% if current_user.is_anonymous %}
+        <a class="menu-item" href="{{ url_for('login') }}">Login</a>
+        {% else %}
+        <a class="menu-item" href="{{ url_for('logout')}}">Logout</a>
+        {% endif %}
+        <a class="menu-item" href="{{ url_for('book')}}">Book Room</a>
+        <a class="menu-item" href="{{ url_for('cancelbooking')}}">Cancel Booking</a>
+        <a class="menu-item" href="{{ url_for('roomavailable')}}">Room Availability</a>
+        <a class="menu-item" href="{{ url_for('roomoccupation')}}">Room Status</a>
+        <a class="menu-item" href="{{ url_for('meetingbooker')}}">Restaurants</a>
+        <a class="menu-item" href="{{ url_for('meetingparticipants')}}">Participants</a>
+        <a class="menu-item" href="{{ url_for('costs')}}">Cost Accrued</a>
+        <a class="menu-item" href="{{ url_for('addteam')}}">Add Team</a>
+        <a class="menu-item" href="{{ url_for('adduser')}}">Add User</a>
+        <a class="menu-item" href="{{ url_for('deleteteam')}}">Delete Team</a>
+        <a class="menu-item" href="{{ url_for('deleteuser')}}">Delete User</a>
+        {% if current_user.is_authenticated %}
+        <div align="right">Log in as: {{current_user.fullname}}</div>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</body>
+</html>
